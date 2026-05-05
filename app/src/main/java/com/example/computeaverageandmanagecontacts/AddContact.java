@@ -1,14 +1,24 @@
 package com.example.computeaverageandmanagecontacts;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.computeaverageandmanagecontacts.model.ContactInfo;
+
 public class AddContact extends AppCompatActivity {
+    EditText etName, etPhone, etEmail, etAge;
+    Button btnSubmit, btnBack;
+
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +30,49 @@ public class AddContact extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        etName = findViewById(R.id.etContactName);
+        etPhone = findViewById(R.id.etContactNumber);
+        etEmail = findViewById(R.id.etEmail);
+        etAge = findViewById(R.id.etAge);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        btnBack = findViewById(R.id.btnBack);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        submitContact();
+    }
+    public void submitContact(){
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = etName.getText().toString().trim();
+                String phone = etPhone.getText().toString().trim();
+                String email = etEmail.getText().toString().trim();
+                String ageStr = etAge.getText().toString().trim();
+
+                if (name.isEmpty() || phone.isEmpty() || email.isEmpty() || ageStr.isEmpty()) {
+                    displayMessage("Input Error", "Please fill all fields");
+                    return;
+                }
+                ContactInfo newContact = new ContactInfo(name, phone, email, Integer.parseInt(ageStr));
+                Contact.contactList.add(newContact);
+
+                displayMessage("Save Success", "Contact Added!");
+                finish();
+            }
+        });
+    }
+
+    public void displayMessage(String title, String message){
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }

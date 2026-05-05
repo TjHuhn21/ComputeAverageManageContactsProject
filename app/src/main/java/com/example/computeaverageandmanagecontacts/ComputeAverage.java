@@ -45,29 +45,47 @@ public class ComputeAverage extends AppCompatActivity {
         back.setOnClickListener(v -> finish());
         computeAverage();
     }
-    public void computeAverage(){
+    public void computeAverage() {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                if (englishGrade.getText().toString().isEmpty() || filipinoGrade.getText().toString().isEmpty() || mathGrade.getText().toString().isEmpty() || scienceGrade.getText().toString().isEmpty() || mapehGrade.getText().toString().isEmpty()) {
+                if (englishGrade.getText().toString().isEmpty() || filipinoGrade.getText().toString().isEmpty() ||
+                        mathGrade.getText().toString().isEmpty() || scienceGrade.getText().toString().isEmpty() ||
+                        mapehGrade.getText().toString().isEmpty()) {
                     displayMessage("Input Error!", "Please fill out all fields");
                     return;
                 }
 
-                double doubleEnglishGrade = Double.parseDouble(englishGrade.getText().toString());
-                double doubleFilipinoGrade = Double.parseDouble(filipinoGrade.getText().toString());
-                double doubleMathGrade = Double.parseDouble(mathGrade.getText().toString());
-                double doubleScienceGrade = Double.parseDouble(scienceGrade.getText().toString());
-                double doubleMapehGrade = Double.parseDouble(mapehGrade.getText().toString());
-                double average = (doubleEnglishGrade + doubleFilipinoGrade + doubleMathGrade + doubleScienceGrade + doubleMapehGrade) / 5;
+                try {
+
+                    double doubleEnglishGrade = Double.parseDouble(englishGrade.getText().toString());
+                    double doubleFilipinoGrade = Double.parseDouble(filipinoGrade.getText().toString());
+                    double doubleMathGrade = Double.parseDouble(mathGrade.getText().toString());
+                    double doubleScienceGrade = Double.parseDouble(scienceGrade.getText().toString());
+                    double doubleMapehGrade = Double.parseDouble(mapehGrade.getText().toString());
 
 
-                Intent intent = new Intent(ComputeAverage.this, AverageResult.class);
-                intent.putExtra("computedAverage", average);
-                startActivity(intent);
+                    if (!isGradesValid(doubleEnglishGrade, doubleFilipinoGrade, doubleMathGrade, doubleScienceGrade, doubleMapehGrade)) {
+                        return;
+                    }
 
+
+                    double average = (doubleEnglishGrade + doubleFilipinoGrade + doubleMathGrade + doubleScienceGrade + doubleMapehGrade) / 5;
+
+
+                    Intent intent = new Intent(ComputeAverage.this, AverageResult.class);
+                    intent.putExtra("computedAverage", average);
+                    intent.putExtra("englishGrade", doubleEnglishGrade);
+                    intent.putExtra("filipinoGrade", doubleFilipinoGrade);
+                    intent.putExtra("mathGrade", doubleMathGrade);
+                    intent.putExtra("scienceGrade", doubleScienceGrade);
+                    intent.putExtra("mapehGrade", doubleMapehGrade);
+                    intent.putExtra("computedAverage", average);
+                    startActivity(intent);
+
+                } catch (NumberFormatException e) {
+                    displayMessage("Format Error!", "Please enter valid numeric values.");
+                }
             }
         });
     }
@@ -76,5 +94,14 @@ public class ComputeAverage extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
+    }
+    public boolean isGradesValid(double englishGrade, double filipinoGrade, double mathGrade, double scienceGrade, double mapehGrade){
+        if(englishGrade < 1.0 || englishGrade > 100 || filipinoGrade < 1.0 || filipinoGrade > 100 || mathGrade < 1.0 || mathGrade > 100
+                || scienceGrade < 1.0 || scienceGrade > 100 || mapehGrade < 1.0 || mapehGrade > 100){
+            displayMessage("Invalid Grade! ","Please enter a value between 0 and 100.");
+            return false;
+        }
+        return true;
+
     }
 }
