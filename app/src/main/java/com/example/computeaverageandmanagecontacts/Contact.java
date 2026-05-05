@@ -1,6 +1,8 @@
 package com.example.computeaverageandmanagecontacts;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +11,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Contact extends AppCompatActivity {
+    ListView lvContacts;
+    Button btnAddContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +24,7 @@ public class Contact extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        lvContacts = findViewById(R.id.lvContactDetails);
+        btnAddContact = findViewById(R.id.btnAddContact);
     }
 }
