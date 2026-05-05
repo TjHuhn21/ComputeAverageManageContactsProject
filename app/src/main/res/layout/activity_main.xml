@@ -5,33 +5,70 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#7cfca9">
+
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Android Usecase"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/title"
+        android:layout_width="350dp"
+        android:layout_height="80dp"
+        android:background="#abf7e4"
+        android:gravity="center"
+        android:text="Android Use Case"
+        android:textColor="#1B5E20"
+        android:textSize="35sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125" />
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"/>
 
     <Button
-        android:id="@+id/computeAvg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="COMPUTE AVERAGE"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="273dp" />
+            android:id="@+id/computeAvg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="COMPUTE AVERAGE"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintBottom_toTopOf="@id/manageContacts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="32dp"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="40dp"/>
 
-    <Button
-        android:id="@+id/manageContacts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MANAGE CONTACTS"
-        tools:layout_editor_absoluteX="188dp"
-        tools:layout_editor_absoluteY="273dp" />
+        <Button
+            android:id="@+id/manageContacts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="MANAGE CONTACTS"
+            app:layout_constraintTop_toBottomOf="@id/computeAvg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="32dp"
+            android:backgroundTint="#2E7D32"
+            android:layout_marginBottom="40dp"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toTopOf="@id/computeAvg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@drawable/compute"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toTopOf="@id/manageContacts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:srcCompat="@drawable/contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
