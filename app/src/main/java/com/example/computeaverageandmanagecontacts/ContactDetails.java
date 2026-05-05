@@ -24,7 +24,7 @@ public class ContactDetails extends AppCompatActivity {
     Button back;
     int index;
     AlertDialog.Builder builder;
-    ContactInfo currentContact; // Class-level variable so all methods can see it
+    ContactInfo currentContact;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
