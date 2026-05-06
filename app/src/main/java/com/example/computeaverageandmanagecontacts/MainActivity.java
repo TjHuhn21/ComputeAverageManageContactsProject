@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         btnManageContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ComputeAverage.class);
+                Intent intent = new Intent(MainActivity.this, Contact.class);
                 startActivity(intent);
             }
         });

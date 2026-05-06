@@ -38,6 +38,9 @@ public class AverageResult extends AppCompatActivity {
         tvScience = findViewById(R.id.tvScienceGrade);
         tvEnglish = findViewById(R.id.tvEnglishGrade);
 
+        btnBack = findViewById(R.id.btnBack);
+        heronReaction = findViewById(R.id.imgHeron);
+
         Intent intent = getIntent();
 
         average = intent.getDoubleExtra("computedAverage", 0.0);

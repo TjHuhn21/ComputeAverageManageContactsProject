@@ -59,7 +59,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@drawable/compute"/>
+        android:src="@drawable/compute"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -69,6 +69,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@drawable/contact" />
+        android:src="@drawable/contact" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

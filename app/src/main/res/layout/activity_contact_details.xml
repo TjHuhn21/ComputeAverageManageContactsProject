@@ -48,7 +48,7 @@
         app:layout_constraintHorizontal_bias="0.124"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvContactDetails"
-        app:srcCompat="@drawable/call" />
+        android:src="@drawable/call" />
 
     <ImageView
         android:id="@+id/imgvDelete"
@@ -60,7 +60,7 @@
         app:layout_constraintHorizontal_bias="0.843"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvContactDetails"
-        app:srcCompat="@drawable/delete" />
+        android:src="@drawable/delete" />
 
     <TextView
         android:id="@+id/tvCall"

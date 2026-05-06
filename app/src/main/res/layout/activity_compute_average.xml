@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
-        tools:srcCompat="@drawable/heron"/>
+        android:src="@drawable/heron"/>
 
     <LinearLayout
         android:id="@+id/inputContainer"

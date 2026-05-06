@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -38,6 +39,8 @@ public class AddContact extends AppCompatActivity {
         btnSubmit = findViewById(R.id.btnSubmit);
         btnBack = findViewById(R.id.btnBack);
 
+        builder = new AlertDialog.Builder(this);
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,11 +63,29 @@ public class AddContact extends AppCompatActivity {
                     displayMessage("Input Error", "Please fill all fields");
                     return;
                 }
-                ContactInfo newContact = new ContactInfo(name, phone, email, Integer.parseInt(ageStr));
-                Contact.contactList.add(newContact);
+                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    displayMessage("Invalid Email", "Please enter a valid email address.");
+                    return;
+                }
 
-                displayMessage("Save Success", "Contact Added!");
-                finish();
+                try {
+                    int age = Integer.parseInt(ageStr);
+
+                    if (age < 0 || age > 120) {
+                        displayMessage("Invalid Age", "Please enter a realistic age (0-120).");
+                        return;
+                    }
+
+                    ContactInfo newContact = new ContactInfo(name, phone, email, age);
+                    Contact.contactList.add(newContact);
+
+                    Toast.makeText(AddContact.this, "Contact Saved Successfully!", Toast.LENGTH_SHORT).show();
+
+                    finish();
+
+                } catch (NumberFormatException e) {
+                    displayMessage("Format Error", "Age must be a whole number.");
+                }
             }
         });
     }

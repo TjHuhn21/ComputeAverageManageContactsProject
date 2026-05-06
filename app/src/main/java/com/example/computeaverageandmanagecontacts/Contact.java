@@ -7,8 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,10 +22,12 @@ import java.util.ArrayList;
 
 public class Contact extends AppCompatActivity {
     ListView lvContacts;
-    Button btnAddContact;
+    Button btnAddContact, btnExportContact;
 
     public static ArrayList<ContactInfo> contactList = new ArrayList<>();
     ArrayAdapter<ContactInfo> adapter;
+
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +41,9 @@ public class Contact extends AppCompatActivity {
         });
         lvContacts = findViewById(R.id.lvContactDetails);
         btnAddContact = findViewById(R.id.btnAddContact);
+        btnExportContact = findViewById(R.id.btnExport);
 
-        lvContacts = findViewById(R.id.lvContactDetails);
-        btnAddContact = findViewById(R.id.btnAddContact);
-
+        builder = new AlertDialog.Builder(this);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, contactList);
         lvContacts.setAdapter(adapter);
 
@@ -60,6 +63,8 @@ public class Contact extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        exportContact();
     }
 
     @Override
@@ -68,5 +73,43 @@ public class Contact extends AppCompatActivity {
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
+    }
+    public void exportContact(){
+        btnExportContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (contactList.isEmpty()) {
+                    Toast.makeText(Contact.this, "Nothing to export!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                StringBuilder data = new StringBuilder();
+                data.append("--- CONTACT LIST ---\n\n");
+
+                for (ContactInfo c : contactList) {
+                    data.append("Name: ").append(c.getName()).append("\n");
+                    data.append("Phone: ").append(c.getPhone()).append("\n");
+                    data.append("Email: ").append(c.getEmail()).append("\n");
+                    data.append("--------------------\n");
+                }
+
+                try {
+                    java.io.File file = new java.io.File(getExternalFilesDir(null), "contacts.txt");
+                    java.io.FileOutputStream fos = new java.io.FileOutputStream(file);
+                    fos.write(data.toString().getBytes());
+                    fos.close();
+
+                    displayMessage("Export Successful", "File saved to: " + file.getAbsolutePath());
+                } catch (Exception e) {
+                    displayMessage("Export Failed", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
+    public void displayMessage(String title, String message){
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 }

@@ -40,10 +40,11 @@ public class ComputeAverage extends AppCompatActivity {
         back = findViewById(R.id.btnBack);
 
         builder= new AlertDialog.Builder(this);
+        computeAverage();
 
         intent = new Intent(ComputeAverage.this, AverageResult.class);
         back.setOnClickListener(v -> finish());
-        computeAverage();
+
     }
     public void computeAverage() {
         submit.setOnClickListener(new View.OnClickListener() {

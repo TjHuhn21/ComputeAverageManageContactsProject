@@ -3,6 +3,7 @@ package com.example.computeaverageandmanagecontacts;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class ContactDetails extends AppCompatActivity {
     int index;
     AlertDialog.Builder builder;
     ContactInfo currentContact;
+    ArrayAdapter<ContactInfo> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,5 +106,13 @@ public class ContactDetails extends AppCompatActivity {
                         .show();
             }
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // This tells the ListView to refresh because a contact might have been deleted
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 }
